@@ -1,107 +1,110 @@
 buildscript {
+    
     repositories {
+        
         mavenLocal()
         mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         jcenter()
+        google()
+        
     }
+    
     dependencies {
-        classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
-        classpath 'com.android.tools.build:gradle:1.5.0'
-        classpath 'com.mobidevelop.robovm:robovm-gradle-plugin:2.3.0'
-        classpath 'org.multi-os-engine:moe-gradle:1.2.3'
+        
+        classpath 'com.android.tools.build:gradle:3.2.0'
+        
     }
 }
 
+
+
 allprojects {
+    
     apply plugin: "eclipse"
     apply plugin: "idea"
 
     version = '1.0'
+    
     ext {
+        
         appName = "gdx-gamesvcs-app"
-        gdxVersion = '1.9.6'
-        roboVMVersion = '2.3.0'
-        gamsvcsVersion = '0.2.5-SNAPSHOT'
+        gdxVersion = '1.9.9'
+        gamsvcsVersion = '1.0.0'
+        
     }
 
     repositories {
+        
         mavenLocal()
         mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+        jcenter()
+        google()
+        
     }
+    
 }
+
 
 project(":desktop") {
-    apply plugin: "java"
-
+    
+    apply plugin: "java-library"
 
     dependencies {
+        
         compile project(":core")
-        compile "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
-        compile "de.golfgl.gdxgamesvcs:gdx-gamesvcs-desktop:$gamsvcsVersion"
+        
+        api "com.badlogicgames.gdx:gdx-backend-lwjgl:$gdxVersion"
+        api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+
+        api "de.golfgl.gdxgamesvcs:gdx-gamesvcs-desktop-gpgs:$gamsvcsVersion"
+        
     }
+    
 }
 
+
 project(":android") {
+    
     apply plugin: "android"
 
     configurations { natives }
 
     dependencies {
+        
         compile project(":core")
-        compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
+        
+        api "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
+        
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-arm64-v8a"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86_64"
-        compile "de.golfgl.gdxgamesvcs:gdx-gamesvcs-android:$gamsvcsVersion"
+        
+        api "de.golfgl.gdxgamesvcs:gdx-gamesvcs-android-gpgs:$gamsvcsVersion"
+        
     }
+    
 }
 
-project(":ios") {
-    apply plugin: "java"
-    apply plugin: "robovm"
-
-
-    dependencies {
-        compile project(":core")
-        compile "com.mobidevelop.robovm:robovm-rt:$roboVMVersion"
-        compile "com.mobidevelop.robovm:robovm-cocoatouch:$roboVMVersion"
-        compile "com.badlogicgames.gdx:gdx-backend-robovm:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-ios"
-        compile "de.golfgl.gdxgamesvcs:gdx-gamesvcs-ios:$gamsvcsVersion"
-    }
-}
-
-project(":html") {
-    apply plugin: "gwt"
-    apply plugin: "war"
-
-
-    dependencies {
-        compile project(":core")
-        compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
-        compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
-        compile "de.golfgl.gdxgamesvcs:gdx-gamesvcs-html:$gamsvcsVersion"
-        compile "de.golfgl.gdxgamesvcs:gdx-gamesvcs-core:$gamsvcsVersion:sources"
-        compile "de.golfgl.gdxgamesvcs:gdx-gamesvcs-html:$gamsvcsVersion:sources"
-    }
-}
 
 project(":core") {
-    apply plugin: "java"
-
+    
+    apply plugin: "java-library"
 
     dependencies {
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-        compile "de.golfgl.gdxgamesvcs:gdx-gamesvcs-core:$gamsvcsVersion"
+        
+        api "com.badlogicgames.gdx:gdx:$gdxVersion"
+        api "de.golfgl.gdxgamesvcs:gdx-gamesvcs-core:$gamsvcsVersion"
+        
     }
+    
 }
+
 
 tasks.eclipse.doLast {
     delete ".project"

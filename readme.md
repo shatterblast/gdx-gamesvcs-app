@@ -1,14 +1,25 @@
 # gdx-gamesvcs-app
 
+(A "local.properties" FILE WILL NEED ADDING TO THE PROJECT FOR THE ANDROID PART TO COMPILE.  AS USUAL, "DesktopLauncher" WILL NEED "../ANDROID/ASSETS" OR SIMILAR SET IN THE RUN CONFIGURATION OF INTELLIJ.)
+
+#
+
 Test and demo app for gdx-gamesvcs https://github.com/MrStahlfelge/gdx-gamesvcs
 
+## Google Play Games branch
+
+This is the Google Play Games example branch. See the other branches for examples for 
+the supported Game Service API clients and compare them against master to see 
+what is added to embed a certain service.
+
+## Documentation
 See the documentation and wiki at the main project for more information.
 
-## Master branch
+You will find information to the Gpgs implementation at
+https://github.com/MrStahlfelge/gdx-gamesvcs/wiki/Google-Play-Games
 
-This is the master branch. See the branches for examples for the supported 
-Game Service API clients and compare them against this branch to see what is 
-added to embed a certain service.
+## Working demo
+A compiled version of this branch is not published due to Play Games' restrictions for beta test users.
 
 ## Updates & News
 Follow me to receive release updates about this

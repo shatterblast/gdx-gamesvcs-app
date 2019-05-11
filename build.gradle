@@ -8,12 +8,10 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'org.wisepersist:gwt-gradle-plugin:1.0.6'
         classpath 'com.android.tools.build:gradle:3.2.0'
-        classpath 'com.mobidevelop.robovm:robovm-gradle-plugin:2.3.5'
-        classpath 'org.multi-os-engine:moe-gradle:1.2.3'
     }
 }
+
 
 allprojects {
     apply plugin: "eclipse"
@@ -23,18 +21,19 @@ allprojects {
     ext {
         appName = "gdx-gamesvcs-app"
         gdxVersion = '1.9.8'
-        roboVMVersion = '2.3.5'
         gamsvcsVersion = '0.2.5-SNAPSHOT'
     }
 
     repositories {
         mavenLocal()
         mavenCentral()
-        google()
+        maven { url "https://plugins.gradle.org/m2/" }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+        jcenter()
+        google()
     }
 }
+
 
 project(":desktop") {
     apply plugin: "java"
@@ -47,6 +46,7 @@ project(":desktop") {
         compile "de.golfgl.gdxgamesvcs:gdx-gamesvcs-desktop-gpgs:$gamsvcsVersion"
     }
 }
+
 
 project(":android") {
     apply plugin: "android"
@@ -65,36 +65,6 @@ project(":android") {
     }
 }
 
-project(":ios") {
-    apply plugin: "java"
-    apply plugin: "robovm"
-
-
-    dependencies {
-        compile project(":core")
-        compile "com.mobidevelop.robovm:robovm-rt:$roboVMVersion"
-        compile "com.mobidevelop.robovm:robovm-cocoatouch:$roboVMVersion"
-        compile "com.badlogicgames.gdx:gdx-backend-robovm:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-ios"
-        compile "de.golfgl.gdxgamesvcs:gdx-gamesvcs-ios:$gamsvcsVersion"
-    }
-}
-
-project(":html") {
-    apply plugin: "gwt"
-    apply plugin: "war"
-
-
-    dependencies {
-        compile project(":core")
-        compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
-        compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
-        compile "de.golfgl.gdxgamesvcs:gdx-gamesvcs-html-gpgs:$gamsvcsVersion"
-        compile "de.golfgl.gdxgamesvcs:gdx-gamesvcs-core:$gamsvcsVersion:sources"
-        compile "de.golfgl.gdxgamesvcs:gdx-gamesvcs-html-gpgs:$gamsvcsVersion:sources"
-    }
-}
 
 project(":core") {
     apply plugin: "java"

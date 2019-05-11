@@ -1,8 +1,12 @@
 android {
+    
     buildToolsVersion "28.0.3"
-    compileSdkVersion 27
+    compileSdkVersion 28
+    
     sourceSets {
+        
         main {
+            
             manifest.srcFile 'AndroidManifest.xml'
             java.srcDirs = ['src']
             aidl.srcDirs = ['src']
@@ -10,17 +14,25 @@ android {
             res.srcDirs = ['res']
             assets.srcDirs = ['assets']
             jniLibs.srcDirs = ['libs']
+            
         }
 
     }
+    
     packagingOptions {
+        
         exclude 'META-INF/robovm/ios/robovm.xml'
+        
     }
+    
     defaultConfig {
+        
         applicationId "de.golfgl.gdxgamesvcsapp"
         minSdkVersion 15
-        targetSdkVersion 27
+        targetSdkVersion 28
+        
     }
+    
 }
 
 
@@ -53,11 +65,13 @@ task copyAndroidNatives() {
     }
 }
 
+
 tasks.whenTaskAdded { packageTask ->
     if (packageTask.name.contains("package")) {
         packageTask.dependsOn 'copyAndroidNatives'
     }
 }
+
 
 task run(type: Exec) {
     def path
@@ -81,6 +95,7 @@ task run(type: Exec) {
     commandLine "$adb", 'shell', 'am', 'start', '-n', 'de.golfgl.gdxgamesvcsapp/de.golfgl.gdxgamesvcsapp.AndroidLauncher'
 }
 
+
 // sets up the Android Eclipse project, using the old Ant based build.
 eclipse {
     // need to specify Java source sets explicitly, SpringSource Gradle Eclipse plugin
@@ -92,8 +107,8 @@ eclipse {
     }
 
     jdt {
-        sourceCompatibility = 1.7
-        targetCompatibility = 1.7
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
     }
 
     classpath {
@@ -111,6 +126,7 @@ eclipse {
         buildCommand "com.android.ide.eclipse.adt.ApkBuilder"
     }
 }
+
 
 // sets up the Android Idea project, using the old Ant based build.
 idea {

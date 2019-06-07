@@ -1,9 +1,9 @@
-apply plugin: "java"
+apply plugin: "java-library"
 
 sourceCompatibility = 1.7
 sourceSets.main.java.srcDirs = [ "src/" ]
 
-project.ext.mainClassName = "de.golfgl.gdxgamesvcsapp.desktop.DesktopLauncher"
+project.ext.mainClassName = "com.gdxgamesvcsapp.desktop.DesktopLauncher"
 project.ext.assetsDir = new File("../android/assets");
 
 task run(dependsOn: classes, type: JavaExec) {

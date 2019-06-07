@@ -27,7 +27,7 @@ android {
     
     defaultConfig {
         
-        applicationId "de.golfgl.gdxgamesvcsapp"
+        applicationId "com.gdxgamesvcsapp"
         minSdkVersion 15
         targetSdkVersion 28
         
@@ -92,7 +92,7 @@ task run(type: Exec) {
     }
 
     def adb = path + "/platform-tools/adb"
-    commandLine "$adb", 'shell', 'am', 'start', '-n', 'de.golfgl.gdxgamesvcsapp/de.golfgl.gdxgamesvcsapp.AndroidLauncher'
+    commandLine "$adb", 'shell', 'am', 'start', '-n', 'com.gdxgamesvcsapp/com.gdxgamesvcsapp.AndroidLauncher'
 }
 
 
